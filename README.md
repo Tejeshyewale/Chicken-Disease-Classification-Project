@@ -185,6 +185,6 @@ This project is open-source and available under the MIT License.
 
 ## 👨‍💻 Author
 
-Your Name
+Tejesh Yewale 
 
 If you like this project, don’t forget to ⭐ the repository!
