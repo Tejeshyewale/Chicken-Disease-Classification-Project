@@ -1,4 +1,7 @@
-tensorflow
+# TensorFlow must match the Python interpreter ABI. Use a supported version (3.10/3.11/3.12).
+# Python 3.13 is not yet officially supported, so pick a release compatible with your env.
+# pin tensorflow to avoid accidental RC builds
+tensorflow==2.13.0
 numpy
 pandas  
 dvc
