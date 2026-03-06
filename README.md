@@ -149,6 +149,8 @@ docker run -p 5000:5000 chicken-app
 ```
 
 ---
+### ECR Repo URl : 
+    save the url:158975163941.dkr.ecr.eu-north-1.amazonaws.com/chicken
 
 ## 📊 Model Output
 
