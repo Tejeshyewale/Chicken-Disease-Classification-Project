@@ -1,132 +1,165 @@
-# 🐔 Chicken Disease Classification
-
-An end-to-end **Deep Learning & MLOps project** that detects chicken diseases from images using Convolutional Neural Networks (CNN). This project demonstrates data ingestion, model training, evaluation, experiment tracking, and deployment using Flask and Docker.
-
----
+#  Chicken Disease Classification – MLOps Project
 
 ## 📌 Project Overview
 
-Poultry diseases can cause major losses for farmers. This project helps in automatically identifying whether a chicken is healthy or infected using image classification.
+This project builds a complete **end‑to‑end MLOps pipeline** to detect chicken diseases from fecal images using a deep learning model. The goal is to help poultry farmers quickly identify diseases and take preventive actions.
 
-The project covers:
-
-* Data Ingestion
-* Data Validation
-* Data Transformation
-* Model Training
-* Model Evaluation
-* Model Deployment
-* CI/CD Integration
+The project demonstrates **machine learning + deployment + CI/CD + cloud infrastructure**.
 
 ---
 
-## 🚀 Tech Stack
+# 🚀 Live Application
 
-* Python
-* TensorFlow / Keras
-* OpenCV
-* Flask
-* DVC (Data Version Control)
-* MLflow (optional for experiment tracking)
-* Docker
-* GitHub Actions (CI/CD)
+The project is deployed on AWS EC2 using Docker.
+
+🔗 **Live Demo:**
+[http://13.63.53.244:5000](http://13.63.53.244:5000)
 
 ---
 
-## 🗂 Project Structure
+# 🧠 Problem Statement
+
+Chicken diseases can spread quickly in poultry farms. Manual detection is slow and requires expertise. This system automatically analyzes fecal images and predicts whether the chicken is healthy or infected.
+
+---
+
+# ⚙️ Tech Stack
+
+* **Python**
+* **TensorFlow / Keras**
+* **Flask (API & Web App)**
+* **Docker (Containerization)**
+* **AWS EC2 (Deployment)**
+* **GitHub Actions (CI/CD)**
+* **DVC (Data Version Control)**
+
+---
+
+# 🏗️ Project Architecture
 
 ```
-Chicken-Disease-Classification/
+User Upload Image
+        │
+        ▼
+Flask Web Application
+        │
+        ▼
+Prediction Pipeline
+        │
+        ▼
+Trained Deep Learning Model
+        │
+        ▼
+Prediction Result
+```
+
+---
+
+# 📂 Project Structure
+
+```
+Chicken-Disease-Classification-Project
 │
-├── .github/workflows/        # CI/CD pipelines
+├── artifacts/                # Generated outputs (models, logs)
 ├── config/                   # Configuration files
-├── research/                 # Jupyter notebooks & experiments
+├── research/                 # Jupyter notebooks
 ├── src/                      # Source code
-│   └── cnnClassifier/        # ML pipeline modules
-├── templates/                # HTML templates for Flask app
-├── app.py                    # Flask application
-├── main.py                   # Training pipeline entry point
-├── params.yaml               # Model parameters
-├── requirements.txt          # Dependencies
+│   └── cnnClassifier/
+│
+├── templates/                # HTML templates
+├── app.py                    # Flask web application
+├── main.py                   # Training pipeline
 ├── Dockerfile                # Docker configuration
+├── requirements.txt          # Python dependencies
 └── README.md
 ```
 
 ---
 
-## ⚙️ How It Works
+# 🔬 Machine Learning Pipeline
 
 ### 1️⃣ Data Ingestion
 
-* Download dataset
-* Store in artifacts folder
-* Track using DVC
+Downloads and extracts the chicken disease dataset.
 
-### 2️⃣ Data Validation
+### 2️⃣ Base Model Preparation
 
-* Check data format
-* Ensure no missing or corrupted files
+Loads a pretrained CNN architecture for transfer learning.
 
-### 3️⃣ Data Transformation
+### 3️⃣ Model Training
 
-* Resize images
-* Normalize pixel values
-* Create train/test splits
+Trains the network using labeled fecal images.
 
-### 4️⃣ Model Training
+### 4️⃣ Model Evaluation
 
-* Build CNN model
-* Train on training dataset
-* Save trained model
+Evaluates performance and saves metrics.
 
-### 5️⃣ Model Evaluation
+### 5️⃣ Prediction Pipeline
 
-* Evaluate on test dataset
-* Generate accuracy and loss metrics
+Loads the trained model and predicts disease class.
 
 ### 6️⃣ Deployment
 
-* Flask API for predictions
-* Docker containerization
-* CI/CD for automation
+Deploys the model through a Flask API and Docker container.
 
 ---
 
-## 🛠 Installation Guide
+# 💻 Run the Project Locally
 
-### Step 1: Clone Repository
+## 1️⃣ Clone Repository
 
-```
-git clone <your-repository-link>
-cd Chicken-Disease-Classification
-```
-
-### Step 2: Create Virtual Environment
-
-```
-conda create -n chicken python=3.8 -y
-conda activate chicken
+```bash
+git clone https://github.com/Tejeshyewale/Chicken-Disease-Classification-Project.git
+cd Chicken-Disease-Classification-Project
 ```
 
-### Step 3: Install Dependencies
+---
 
+## 2️⃣ Create Virtual Environment
+
+```bash
+python -m venv venv
 ```
+
+Activate environment
+
+**Windows**
+
+```bash
+venv\\Scripts\\activate
+```
+
+**Linux / Mac**
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+## 3️⃣ Install Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-### Step 4: Run Training Pipeline
+---
 
-```
+## 4️⃣ Train the Model
+
+```bash
 python main.py
 ```
 
-### Step 5: Run Flask App
+---
 
-```
+## 5️⃣ Run the Web Application
+
+```bash
 python app.py
 ```
 
-Open in browser:
+Then open:
 
 ```
 http://localhost:5000
@@ -134,59 +167,99 @@ http://localhost:5000
 
 ---
 
-## 🐳 Run with Docker
+# 🐳 Run Using Docker
 
-### Build Docker Image
+## Build Docker Image
 
-```
-docker build -t chicken-app .
-```
-
-### Run Container
-
-```
-docker run -p 5000:5000 chicken-app
+```bash
+docker build -t chicken-disease-app .
 ```
 
----
-### ECR Repo URl : 
-    save the url:158975163941.dkr.ecr.eu-north-1.amazonaws.com/chicken
+## Run Container
 
-## 📊 Model Output
+```bash
+docker run -d -p 5000:5000 chicken-disease-app
+```
 
-The model predicts:
+Open:
 
-* Healthy Chicken
-* Diseased Chicken
-
-Outputs prediction confidence score along with classification.
-
----
-
-## 📈 Future Improvements
-
-* Add more disease categories
-* Improve accuracy with Transfer Learning
-* Deploy on AWS / Azure
-* Add user authentication
-* Build React frontend
+```
+http://localhost:5000
+```
 
 ---
 
-## 🤝 Contribution
+# ☁️ AWS Deployment
 
-Contributions are welcome! Feel free to fork this repository and submit a pull request.
+This project is deployed on **AWS EC2** using Docker containers.
+
+Deployment workflow:
+
+1. Push code to GitHub
+2. GitHub Actions CI/CD pipeline triggers
+3. Docker image builds
+4. Image deploys to EC2
+5. Flask app runs inside container
 
 ---
 
-## 📜 License
+# 🔁 CI/CD Pipeline
 
-This project is open-source and available under the MIT License.
+Automated using **GitHub Actions**.
+
+Pipeline stages:
+
+✔ Install dependencies
+✔ Build Docker image
+✔ Push Docker image
+✔ Deploy to AWS EC2
 
 ---
 
-## 👨‍💻 Author
+# 📊 Model Output
 
-Tejesh Yewale 
+The model predicts two classes:
 
-If you like this project, don’t forget to ⭐ the repository!
+* **Healthy**
+* **Coccidiosis (Chicken Disease)**
+
+Users upload an image and instantly receive a prediction.
+
+---
+
+# 📈 Future Improvements
+
+* Improve model accuracy with larger dataset
+* Add real‑time camera prediction
+* Build mobile application for farmers
+* Add monitoring dashboard
+
+---
+
+# 👨‍💻 Author
+
+**Tejesh Yewale**
+Computer Engineering Student
+
+Interests:
+
+* Data Science
+* Machine Learning
+* MLOps
+* Cloud Deployment
+
+---
+
+# ⭐ Support
+
+If you like this project, please give it a ⭐ on GitHub!
+
+Repository:
+
+[https://github.com/Tejeshyewale/Chicken-Disease-Classification-Project](https://github.com/Tejeshyewale/Chicken-Disease-Classification-Project)
+
+---
+
+# 🌐 Run the Project (Live)
+
+👉 **[http://13.63.53.244:5000](http://13.63.53.244:5000)**
